@@ -1,0 +1,82 @@
+.modal-body {
+  background-color: black;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: #524e4e;
+}
+
+.modal-header button {
+  color: white;
+}
+
+.btn-class {
+  background-color: rgb(33, 33, 33);
+  border-color: black;
+  border-width: 3px;
+  color: aliceblue;
+}
+
+.send-btn-class {
+  color: aliceblue;
+}
+
+.send-btn-class:hover {
+  color: gray;
+  cursor: pointer;
+}
+
+.btn-class:hover {
+  background-color: #3d3d3d;
+  cursor: pointer;
+}
+
+.close-button {
+  font-size: medium;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(239, 155, 155);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(201, 87, 87);
+}
+
+.profile-image {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: large;
+  font-weight: 1000;
+  background-color: rgb(255, 255, 255);
+}
+
+.profile-name {
+  font-size: large;
+  color: aliceblue;
+  margin-left: 5px;
+}
+
+.review-message {
+  padding: 0px 10px;
+  font-size: small;
+  text-align: justify;
+  margin: 0px 35px;
+  max-height: 140px;
+  overflow-y: scroll;
+}
