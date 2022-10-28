@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tblUserDetails {
+  srNo     Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  userName String @unique
+  password String
+
+  tblUserReviews tblUserReviews[]
+}
+
+model tblUserReviews {
+  srNo           Int            @id @default(autoincrement())
+  characterId    BigInt
+  userSrNo       Int
+  reviewMessage  String
+  tblUserDetails tblUserDetails @relation(fields: [userSrNo], references: [srNo])
+
+  @@unique([characterId, userSrNo])
+}
