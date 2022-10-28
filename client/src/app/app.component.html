@@ -1,0 +1,83 @@
+<div
+  class="container-fluid"
+  style="background-color: #000000; padding: 20px 10px; z-index: 100"
+>
+  <nav
+    class="navbar-expand-lg navbar-light"
+    style="
+      background-color: #524e4e;
+      flex-direction: row;
+      min-height: min-content;
+      display: flex;
+      padding: 0px 10px;
+      border-radius: 0.3rem;
+      z-index: 100;
+    "
+  >
+    <a
+      style="color: aliceblue"
+      class="navbar-brand"
+      routerLink="login"
+      title="Image from freepnglogos.com"
+      ><img
+        src="https://www.freepnglogos.com/uploads/marvel-logo-png/image-marvel-studios-logo-disney-wiki-18.png"
+        width="200"
+        alt="marvel studios"
+    /></a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav" style="display: flex">
+        <li class="nav-item active">
+          <a
+            class="nav-link"
+            routerLink="characters/__"
+            style="color: aliceblue"
+            >Characters <span class="sr-only">(current)</span></a
+          >
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="comics" style="color: aliceblue"
+            >Comics <span class="sr-only">(current)</span></a
+          >
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="series" style="color: aliceblue"
+            >Series <span class="sr-only">(current)</span></a
+          >
+        </li>
+
+        <div class="leftButton">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="register" style="color: aliceblue"
+              >Register <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="signin" style="color: aliceblue"
+              >Sign In <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item active">
+            <a
+              class="nav-link"
+              (click)="signOut()"
+              routerLink="signin"
+              style="color: aliceblue"
+              >Sign Out <span class="sr-only">(current)</span></a
+            >
+          </li>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+  <footer class="mt-3" style="z-index: 100">
+    <p
+      class="text-center"
+      style="margin: 20px 0px 10px 0px; color: aliceblue; z-index: 100"
+    >
+      &copy; 2022 MARVEL
+    </p>
+  </footer>
+</div>

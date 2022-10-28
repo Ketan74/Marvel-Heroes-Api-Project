@@ -1,0 +1,125 @@
+<section class="full-screen-container-login">
+  <img
+    class="ec3"
+    src="https://www.freepnglogos.com/uploads/marvel-png/marvel-heroes-transparent-png-stickpng-16.png"
+    alt="marvel heroes transparent png stickpng"
+  />
+  <img
+    class="ec2"
+    src="https://www.freepnglogos.com/uploads/marvel-png/marvel-avengers-png-download-transparent-avengers-clipart-png-only-18.png"
+    alt="marvel heroes transparent png stickpng"
+  />
+
+  <div class="sign-in-container">
+    <img
+      class="logo"
+      src="https://www.freepnglogos.com/uploads/marvel-logo-png/image-marvel-studios-logo-disney-wiki-18.png"
+      alt="logo"
+      property="4"
+    />
+    <h2 class="login-title">REGISTER</h2>
+    <form (submit)="onSubmit()" class="form">
+      <div class="show-error" *ngIf="!isUserAdded">
+        {{ msgUserAdded }}
+      </div>
+
+      <div class="input-container">
+        <input type="text" placeholder="Name" (keyup)="onKey($event)" />
+      </div>
+      <div class="show-error" *ngIf="!isValidName">
+        {{ msgName }}
+      </div>
+
+      <div class="input-container">
+        <input type="email" placeholder="Email Id" (keyup)="onKey($event)" />
+      </div>
+      <div class="show-error" *ngIf="!isValidEmail">
+        {{ msgEmail }}
+      </div>
+
+      <div class="input-container">
+        <input type="text" placeholder="Username" (keyup)="onKey($event)" />
+      </div>
+      <div class="show-error" *ngIf="!isValidUserName">
+        {{ msgUserName }}
+      </div>
+
+      <div class="input-container" *ngIf="passwordVisible">
+        <div class="input-container-password">
+          <input
+            type="text"
+            placeholder="Password"
+            (keyup)="onKey($event)"
+            value="{{ password }}"
+          />
+
+          <i (click)="handlePasswordVisibility()">
+            <mat-icon
+              aria-label="visibility_off"
+              fontIcon="visibility_off"
+            ></mat-icon>
+          </i>
+        </div>
+      </div>
+
+      <div class="input-container" *ngIf="!passwordVisible">
+        <div class="input-container-password">
+          <input
+            type="password"
+            value="{{ password }}"
+            placeholder="Password"
+            (keyup)="onKey($event)"
+          />
+
+          <i (click)="handlePasswordVisibility()">
+            <mat-icon aria-label="visibility" fontIcon="visibility"></mat-icon>
+          </i>
+        </div>
+      </div>
+      <div class="show-error" *ngIf="!isValidPassword">
+        {{ msgPassword }}
+      </div>
+
+      <div class="input-container" *ngIf="confirmPasswordVisible">
+        <div class="input-container-password">
+          <input
+            type="text"
+            placeholder="Confirm Password"
+            (keyup)="onKey($event)"
+            value="{{ confirmPassword }}"
+          />
+
+          <i (click)="handleConfirmPasswordVisibility()">
+            <mat-icon
+              aria-label="visibility_off"
+              fontIcon="visibility_off"
+            ></mat-icon>
+          </i>
+        </div>
+      </div>
+
+      <div class="input-container" *ngIf="!confirmPasswordVisible">
+        <div class="input-container-password">
+          <input
+            type="password"
+            value="{{ confirmPassword }}"
+            placeholder="Confirm Password"
+            (keyup)="onKey($event)"
+          />
+
+          <i (click)="handleConfirmPasswordVisibility()">
+            <mat-icon aria-label="visibility" fontIcon="visibility"></mat-icon>
+          </i>
+        </div>
+      </div>
+      <div class="show-error" *ngIf="!isValidConfirmPassword">
+        {{ msgConfirmPassword }}
+      </div>
+      <button type="submit" class="btn-sub">Register</button>
+    </form>
+    <div class="register-button-in-login">
+      Already Having Account ?
+      <a (click)="routeToRegisterPage()">Sign In</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,415 @@
+<!-- Default -->
+<span
+  class="card"
+  style="
+    display: inline-flex;
+    color: aliceblue;
+    left: 87.2%;
+    font-size: medium;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  "
+  *ngIf="name !== '__'"
+>
+  Welcome, {{ name }}
+</span>
+<div
+  class="container-fluid mt-5"
+  *ngIf="!showSearchResult"
+  style="margin-top: 2rem !important"
+>
+  <h1 style="text-align: center; margin-top: -20px; margin-bottom: 20px">
+    MARVEL CHARACTERS
+  </h1>
+  <div class="row">
+    <div class="col-lg-3" style="margin: auto">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        required
+        name="characterName"
+        id="characterName"
+        placeholder="Search"
+        aria-label="Search"
+        (keyup)="findCharacter($event)"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 mt-3 mb-3" *ngFor="let characters of allCharacters">
+      <div class="card" style="min-height: 550px">
+        <img
+          src="{{
+            characters.thumbnail.path + '.' + characters.thumbnail.extension
+          }}"
+          height="400px"
+          width="100%"
+          class="card-img-top"
+          alt="Some Issue Loading Image..."
+        />
+        <div style="margin: auto 0px">
+          <h5 class="card-title">{{ characters.name }}</h5>
+          <div style="text-align: center">
+            <button
+              type="button"
+              (click)="fetchComicsByCharacter(characters.id)"
+              class="btn btn-class mr-sm-2"
+              style="stroke: black 10px"
+              data-toggle="modal"
+              data-target=".bd-example-modal-lg"
+            >
+              Comics
+            </button>
+            <button
+              type="button"
+              (click)="fetchSeriesByCharacter(characters.id)"
+              class="btn btn-class mr-sm-2"
+              data-toggle="modal"
+              data-target=".cd-example-modal-lg"
+            >
+              Series
+            </button>
+            <button
+              type="button"
+              (click)="fetchReviewByCharacter(characters.id)"
+              class="btn btn-class"
+              data-toggle="modal"
+              data-target=".dd-example-modal-lg"
+            >
+              Review
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search Result -->
+<div class="container-fluid mt-5" *ngIf="showSearchResult">
+  <h1>Search Result For {{ characterName }}</h1>
+  <div class="row">
+    <div class="col-lg-3" style="margin: auto">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        required
+        name="characterName"
+        id="characterName"
+        placeholder="Search"
+        aria-label="Search"
+        (keyup)="findCharacter($event)"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div
+      class="col-lg-3 mt-3 mb-3"
+      *ngFor="let characters of searchedCharacter"
+    >
+      <div class="card">
+        <img
+          src="{{
+            characters.thumbnail.path + '.' + characters.thumbnail.extension
+          }}"
+          height="400px"
+          width="100%"
+          class="card-img-top"
+          alt="Some Issue Loading Image..."
+        />
+        <div style="margin: auto 0px">
+          <h5 class="card-title">{{ characters.name }}</h5>
+          <div style="text-align: center">
+            <button
+              type="button"
+              (click)="fetchComicsByCharacter(characters.id)"
+              class="btn btn-class mr-sm-2"
+              style="stroke: black 10px"
+              data-toggle="modal"
+              data-target=".bd-example-modal-lg"
+            >
+              Comics
+            </button>
+            <button
+              type="button"
+              (click)="fetchSeriesByCharacter(characters.id)"
+              class="btn btn-class mr-sm-2"
+              data-toggle="modal"
+              data-target=".cd-example-modal-lg"
+            >
+              Series
+            </button>
+            <button
+              type="button"
+              (click)="fetchReviewByCharacter(characters.id)"
+              class="btn btn-class"
+              data-toggle="modal"
+              data-target=".dd-example-modal-lg"
+            >
+              Review
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comics -->
+<div
+  class="modal fade bd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Comics</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true" class="close-button">&#9587;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row" *ngIf="showComicsDiv">
+            <div class="col-lg-3 mt-3 mb-3" *ngFor="let c of comics">
+              <div class="card">
+                <img
+                  src="{{ c.thumbnail.path + '.' + c.thumbnail.extension }}"
+                  height="200px"
+                  width="100%"
+                  class="card-img-top"
+                  alt="Some Issue Loading Image..."
+                />
+                <div class="card-body" (click)="showComic(c.title)">
+                  <h5 class="card-title" style="font-size: small">
+                    {{ c.title }}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!showComicsDiv">
+            <h4 style="color: aliceblue">No Comics For this Character</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-class" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Series -->
+<div
+  class="modal fade cd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Series</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true" class="close-button">&#9587;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row" *ngIf="showSeriesDiv">
+            <div class="col-lg-3 mt-3 mb-3" *ngFor="let c of series">
+              <div class="card">
+                <img
+                  src="{{ c.thumbnail.path + '.' + c.thumbnail.extension }}"
+                  height="200px"
+                  width="100%"
+                  class="card-img-top"
+                  alt="Some Issue Loading Image..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title" style="font-size: small">
+                    {{ c.title }}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!showSeriesDiv">
+            <h4>No Series For this Character</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-class" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Review -->
+<div
+  class="modal fade dd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reviews</h5>
+        <button
+          #closeModal
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="reset()"
+        >
+          <span aria-hidden="true" class="close-button">&#9587;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div *ngIf="showReviewDiv">
+            <div *ngFor="let c of reviews">
+              <div
+                class="card"
+                style="
+                  padding: 10px;
+                  margin-bottom: 10px;
+                  background-color: rgb(55, 55, 55);
+                "
+              >
+                <div>
+                  <div style="display: flex; margin-bottom: 5px">
+                    <span class="profile-image">{{
+                      c.name.substring(0, 1)
+                    }}</span>
+                    <span class="profile-name">
+                      {{ c.name }}
+                    </span>
+                  </div>
+
+                  <h5 class="review-message">
+                    {{ c.reviewMessage }}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!showReviewDiv">
+            <h4>No Reviews For this Character</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body" *ngIf="userReview || mode == 'W'">
+        <div class="container" style="overflow-y: unset">
+          <div>
+            <div
+              class="card"
+              style="
+                padding: 10px;
+                margin-bottom: 10px;
+                background-color: rgb(55, 55, 55);
+              "
+            >
+              <div *ngIf="mode == 'R'">
+                <h5
+                  class="review-message"
+                  style="display: inline-grid; width: 86.8%"
+                >
+                  {{ userReview.reviewMessage }}
+                </h5>
+
+                <div style="display: inline-grid">
+                  <div class="send-btn-class" (click)="changeMode('U')">
+                    <mat-icon>edit</mat-icon>
+                  </div>
+                  <div class="send-btn-class" (click)="deleteReview()">
+                    <mat-icon>delete</mat-icon>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                *ngIf="mode == 'W' || mode == 'U'"
+                style="display: flex; justify-content: center"
+              >
+                <textarea
+                  (keyup)="onKey($event)"
+                  [value]="mode == 'U' ? reviewMessage : null"
+                  placeholder="Enter your review"
+                  style="
+                    background: rgb(18, 18, 18);
+                    color: aliceblue;
+                    font-size: small;
+                    min-height: 100px;
+                    min-width: 500px;
+                    border-radius: 5px;
+                  "
+                ></textarea>
+
+                <div
+                  class="send-btn-class"
+                  style="max-height: 20px; margin: auto 5px"
+                  (click)="mode == 'W' ? postReview() : editReview()"
+                >
+                  <span class="material-icons">send</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body" *ngIf="!userReview && mode !== 'W'">
+        <div class="container" style="overflow-y: unset">
+          <div>
+            <div
+              style="display: flex; justify-content: center"
+              class="btn-class"
+              (click)="addAReview()"
+            >
+              <mat-icon>add</mat-icon>
+              <span style="color: aliceblue">Add a review</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-class"
+          data-dismiss="modal"
+          (click)="reset()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
